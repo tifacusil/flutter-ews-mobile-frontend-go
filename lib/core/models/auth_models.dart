@@ -7,7 +7,7 @@ part 'auth_models.g.dart';
 // Login
 // ---------------------------------------------------------------------------
 
-/// Request body for POST /api/v1/auth/login.
+/// Request body for POST /api/v1/users/login.
 @freezed
 abstract class LoginRequest with _$LoginRequest {
   // ignore: invalid_annotation_target
@@ -21,7 +21,7 @@ abstract class LoginRequest with _$LoginRequest {
       _$LoginRequestFromJson(json);
 }
 
-/// Response body for POST /api/v1/auth/login (200).
+/// Response body for POST /api/v1/users/login (200).
 @freezed
 abstract class LoginResponse with _$LoginResponse {
   // ignore: invalid_annotation_target
@@ -42,7 +42,7 @@ abstract class LoginResponse with _$LoginResponse {
 // Register
 // ---------------------------------------------------------------------------
 
-/// Request body for POST /api/v1/auth/register.
+/// Request body for POST /api/v1/users/register.
 @freezed
 abstract class RegisterRequest with _$RegisterRequest {
   // ignore: invalid_annotation_target
@@ -52,7 +52,7 @@ abstract class RegisterRequest with _$RegisterRequest {
     required String email,
     String? phoneE164,
     required String password,
-    /// Defaults to 'operator' server-side if omitted.
+    /// Defaults to 'viewer' server-side if omitted.
     String? role,
   }) = _RegisterRequest;
 
@@ -60,7 +60,7 @@ abstract class RegisterRequest with _$RegisterRequest {
       _$RegisterRequestFromJson(json);
 }
 
-/// Response body for POST /api/v1/auth/register (201).
+/// Response body for POST /api/v1/users/register (201).
 @freezed
 abstract class RegisterResponse with _$RegisterResponse {
   // ignore: invalid_annotation_target

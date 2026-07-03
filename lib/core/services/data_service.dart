@@ -1,7 +1,7 @@
 import 'package:dio/dio.dart';
 
 import '../constants.dart';
-import '../models/api_alert.dart';
+import '../models/api_alert.dart'; // AlertRecipient
 import '../models/project.dart';
 import '../models/recent_alert.dart';
 import '../models/sensor.dart';
@@ -11,7 +11,7 @@ import 'user_management_service.dart'; // ApiException
 /// HTTP client that covers all data-plane endpoints via the Nginx proxy (port 80):
 ///   - Project     GET /api/v1/projects/{id}   (includes sensors inline)
 ///   - Sensors     GET /api/v1/projects/{id}/sensors
-///   - Alerts      GET /api/v1/alerts
+///   - Alerts      GET /api/v1/warnings/alerts/recent
 ///   - Recipients  GET /api/v1/projects/{id}/alert-recipients
 ///
 /// The project list is no longer fetched here — the flow is:
@@ -119,14 +119,15 @@ class DataService {
   // Alerts
   // ---------------------------------------------------------------------------
 
-  /// GET /api/v1/alerts/recent?limit={limit}
+  /// GET /api/v1/warnings/alerts/recent?limit={limit}
   ///
   /// Returns the most recent alerts across all projects the authenticated
-  /// user has access to (filtered server-side by subscription).
+  /// user has access to (filtered server-side by subscription). The gateway
+  /// routes early-warning under `/api/v1/warnings/` and strips that prefix.
   Future<List<RecentAlert>> getRecentAlerts({int limit = 50}) async {
     try {
       final res = await _dio.get<Map<String, dynamic>>(
-        '/api/v1/alerts/recent',
+        '/api/v1/warnings/alerts/recent',
         queryParameters: {'limit': limit},
       );
       final data = res.data;
@@ -134,19 +135,6 @@ class DataService {
       return list
           .cast<Map<String, dynamic>>()
           .map(RecentAlert.fromJson)
-          .toList();
-    } catch (e) {
-      _throw(e);
-    }
-  }
-
-  /// GET /api/v1/alerts/
-  Future<List<ApiAlert>> getAlerts() async {
-    try {
-      final res = await _dio.get<List<dynamic>>('/api/v1/alerts');
-      return (res.data ?? [])
-          .cast<Map<String, dynamic>>()
-          .map(ApiAlert.fromJson)
           .toList();
     } catch (e) {
       _throw(e);

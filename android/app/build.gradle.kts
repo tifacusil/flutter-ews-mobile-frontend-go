@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ews.ews_frontend"
+    namespace = "com.ews.ews_frontend_go"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -18,7 +18,7 @@ android {
 
     defaultConfig {
         // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.ews.ews_frontend"
+        applicationId = "com.ews.ews_frontend_go"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = 24  // flutter_local_notifications v21 requires minSdk 24

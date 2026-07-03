@@ -3,7 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'device.freezed.dart';
 part 'device.g.dart';
 
-/// Request body for POST /api/v1/devices/register.
+/// Request body for POST /api/v1/users/{user_id}/devices.
 @freezed
 abstract class DeviceRegisterRequest with _$DeviceRegisterRequest {
   // ignore: invalid_annotation_target
@@ -18,7 +18,7 @@ abstract class DeviceRegisterRequest with _$DeviceRegisterRequest {
       _$DeviceRegisterRequestFromJson(json);
 }
 
-/// Response body for POST /api/v1/devices/register (200 or 201).
+/// Response body for POST /api/v1/users/{user_id}/devices (200 or 201).
 @freezed
 abstract class DeviceRegisterResponse with _$DeviceRegisterResponse {
   // ignore: invalid_annotation_target

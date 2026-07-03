@@ -23,14 +23,14 @@ class ReadingDto {
   final Map<String, dynamic> payload;
 
   factory ReadingDto.fromJson(Map<String, dynamic> json) => ReadingDto(
-        projectId: (json['projectId'] as String?) ?? '',
-        sensorId: (json['sensorId'] as String?) ?? '',
-        sensorType: (json['sensorType'] as String?) ?? '',
+        projectId: (json['project_id'] as String?) ?? '',
+        sensorId: (json['sensor_id'] as String?) ?? '',
+        sensorType: (json['sensor_type'] as String?) ?? '',
         timestamp: json['timestamp'] != null
             ? DateTime.parse(json['timestamp'] as String)
             : DateTime.fromMillisecondsSinceEpoch(0),
-        receivedAt: json['receivedAt'] != null
-            ? DateTime.tryParse(json['receivedAt'] as String)
+        receivedAt: json['received_at'] != null
+            ? DateTime.tryParse(json['received_at'] as String)
             : null,
         payload: (json['payload'] as Map<String, dynamic>?) ?? {},
       );

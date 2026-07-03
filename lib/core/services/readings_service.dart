@@ -81,7 +81,11 @@ class ReadingsService {
   }
 
   // ---------------------------------------------------------------------------
-  // GET /api/v1/sensors/{sensor_id}/readings
+  // GET /api/v1/data/api/v1/sensors/{sensor_id}/readings
+  //
+  // The gateway routes data-management under `/api/v1/data/` and strips that
+  // prefix; the service itself serves `/api/v1/sensors/...`, hence the doubled
+  // `/api/v1` in the public path.
   // ---------------------------------------------------------------------------
 
   /// Fetches paginated readings for a single sensor.
@@ -112,7 +116,7 @@ class ReadingsService {
       };
 
       final res = await _dio.get<Map<String, dynamic>>(
-        '/api/v1/sensors/$sensorId/readings',
+        '/api/v1/data/api/v1/sensors/$sensorId/readings',
         queryParameters: params,
       );
 

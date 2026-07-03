@@ -7,7 +7,8 @@ import 'user_management_service.dart'; // ApiException
 /// HTTP client for the data-analysis microservice (default: http://localhost:8090).
 ///
 /// No authentication required — CORS-restricted by the service.
-/// All routes are prefixed with `/analysis`.
+/// Routes are exposed by the gateway under `/api/v1/analysis/` (prefix
+/// stripped before reaching the service).
 ///
 /// Obtain via [analysisServiceProvider].
 class AnalysisService {
@@ -72,7 +73,7 @@ class AnalysisService {
       };
 
   // ---------------------------------------------------------------------------
-  // POST /data-analysis/analysis/outliers
+  // POST /api/v1/analysis/outliers
   // ---------------------------------------------------------------------------
 
   Future<OutliersResult> detectOutliers({
@@ -82,7 +83,7 @@ class AnalysisService {
   }) async {
     try {
       final res = await _dio.post<Map<String, dynamic>>(
-        '/data-analysis/analysis/outliers',
+        '/api/v1/analysis/outliers',
         data: {..._base(values, timestamps), 'method': method},
       );
       return OutliersResult.fromJson(res.data!);
@@ -92,7 +93,7 @@ class AnalysisService {
   }
 
   // ---------------------------------------------------------------------------
-  // POST /data-analysis/analysis/denoise
+  // POST /api/v1/analysis/denoise
   // ---------------------------------------------------------------------------
 
   Future<DenoiseResult> denoise({
@@ -102,7 +103,7 @@ class AnalysisService {
   }) async {
     try {
       final res = await _dio.post<Map<String, dynamic>>(
-        '/data-analysis/analysis/denoise',
+        '/api/v1/analysis/denoise',
         data: {..._base(values, timestamps), 'method': method},
       );
       return DenoiseResult.fromJson(res.data!);
@@ -112,7 +113,7 @@ class AnalysisService {
   }
 
   // ---------------------------------------------------------------------------
-  // POST /data-analysis/analysis/regression
+  // POST /api/v1/analysis/regression
   // ---------------------------------------------------------------------------
 
   Future<RegressionResult> regression({
@@ -123,7 +124,7 @@ class AnalysisService {
   }) async {
     try {
       final res = await _dio.post<Map<String, dynamic>>(
-        '/data-analysis/analysis/regression',
+        '/api/v1/analysis/regression',
         data: {
           ..._base(values, timestamps),
           'model': model,
@@ -137,7 +138,7 @@ class AnalysisService {
   }
 
   // ---------------------------------------------------------------------------
-  // POST /data-analysis/analysis/predict
+  // POST /api/v1/analysis/predict
   // ---------------------------------------------------------------------------
 
   Future<PredictResult> predict({
@@ -149,7 +150,7 @@ class AnalysisService {
   }) async {
     try {
       final res = await _dio.post<Map<String, dynamic>>(
-        '/data-analysis/analysis/predict',
+        '/api/v1/analysis/predict',
         data: {
           ..._base(values, timestamps),
           'model': model,
