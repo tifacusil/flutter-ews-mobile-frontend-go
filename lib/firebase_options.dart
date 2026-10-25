@@ -53,11 +53,12 @@ class DefaultFirebaseOptions {
     }
   }
 
+  // Injected via --dart-define-from-file=.env.json (see .env.example.json).
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCKLcsWaffv3k3LsEkIwouzFpUTr5PNXhU',
-    appId: '1:426668129322:android:408e9ef101281890175753',
-    messagingSenderId: '426668129322',
-    projectId: 'early-warning-6c2f0',
-    storageBucket: 'early-warning-6c2f0.firebasestorage.app',
+    apiKey: String.fromEnvironment('FIREBASE_API_KEY'),
+    appId: String.fromEnvironment('FIREBASE_APP_ID'),
+    messagingSenderId: String.fromEnvironment('FIREBASE_MESSAGING_SENDER_ID'),
+    projectId: String.fromEnvironment('FIREBASE_PROJECT_ID'),
+    storageBucket: String.fromEnvironment('FIREBASE_STORAGE_BUCKET'),
   );
 }

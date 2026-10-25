@@ -19,8 +19,9 @@ Monitors two sites (**Shangtan** and **Lingzhan**) via five sensor types: GNSS, 
 ## First-time setup
 
 ```bash
-# 1. Copy the environment template and fill in your API host
+# 1. Copy the environment template and fill in your API host and Firebase values
 cp .env.example.json .env.json
+#    Place the Firebase config at android/app/google-services.json (gitignored)
 
 # 2. Install dependencies
 flutter pub get
@@ -49,6 +50,13 @@ Runtime values are injected at build time via `--dart-define-from-file`. Copy `.
 | `API_CONNECT_TIMEOUT_MS` | `10000` | Dio connect timeout (ms) |
 | `API_RECEIVE_TIMEOUT_MS` | `15000` | Dio receive timeout (ms) |
 | `DEFAULT_POLLING_INTERVAL_S` | `3600` | Sensor polling interval (seconds) |
+| `FIREBASE_API_KEY` | — | Firebase Android API key |
+| `FIREBASE_APP_ID` | — | Firebase Android app ID |
+| `FIREBASE_MESSAGING_SENDER_ID` | — | FCM sender ID |
+| `FIREBASE_PROJECT_ID` | — | Firebase project ID |
+| `FIREBASE_STORAGE_BUCKET` | — | Firebase storage bucket |
+
+`android/app/google-services.json` is also required for Android builds. It is gitignored; download it from the Firebase console.
 
 All constants are centralised in `lib/core/constants.dart`.
 
